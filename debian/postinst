@@ -10,18 +10,16 @@ if [ ! -f $CFG ] ; then
     . /usr/share/debconf/confmodule
 
     db_get redmine-mail2ticket/enviroment
+    echo "$RET:" >> $CFG 
     db_get redmine-mail2ticket/project
+    echo "  $RET:" >> $CFG 
     db_get redmine-mail2ticket/method
+    echo "    method: $RET" >> $CFG 
     db_get redmine-mail2ticket/host
+    echo "    host: $RET" >> $CFG 
     db_get redmine-mail2ticket/password
+    echo "    password: $RET" >> $CFG 
     db_get redmine-mail2ticket/username
-
-    echo > $CFG 
-    echo "$enviroment:" >> $CFG 
-    echo "  $project:" >> $CFG 
-    echo "    method: $method" >> $CFG 
-    echo "    host: $host" >> $CFG 
-    echo "    password: $password" >> $CFG 
     echo "    username: $username" >> $CFG 
 
     if [ "$1" = "configure" ]; then
