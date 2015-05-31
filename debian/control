@@ -7,7 +7,7 @@ Priority: optional
 Homepage: http://vitexsoftware.cz/
 
 Package: redmine-mail2ticket
-Depends: ${misc:Depends},libjs-twitter-bootstrap, redmine
+Depends: ${misc:Depends},libjs-twitter-bootstrap, ruby | ruby-interpreter,redmine
 Architecture: all
 Section: web
 Priority: optional

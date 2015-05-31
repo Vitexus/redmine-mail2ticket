@@ -1,3 +1,2 @@
-*/5 * * * *     root    /usr/bin/redmine-mail2ticket
-
-                                                                                                         
+*/5 * * * *     root    /usr/share/redmine/extra/mail_handler/mail2ticket.rb
+                                                                                                      
