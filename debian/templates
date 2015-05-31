@@ -1,0 +1,30 @@
+Template: redmine-mail2ticket/enviroment
+Type: select
+Choices: production,development
+Description: application environment
+ Usualy production or testing
+
+Template: redmine-mail2ticket/project
+Type: string
+Description: redmine project name 
+ Which project have to handle this mailbox ?
+
+Template: redmine-mail2ticket/method
+Type: select
+Choices: imap,pop
+Description: mail address of icinga admin 
+ Or simply press enter to use auto genrated name
+
+Template: redmine-mail2ticket/host
+Type: string
+Description: hostname or ip  
+ Where to get mailbox
+
+Template: redmine-mail2ticket/password
+Type: password
+Description: Mailbox account password
+
+Template: redmine-mail2ticket/username
+Type: string
+Description: Mailbox account username
+

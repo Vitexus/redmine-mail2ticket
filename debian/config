@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+db_version 2.0
+
+if [ ! -f /etc/redmine/default/mail2ticket.yml ]; then
+
+	db_input high redmine-mail2ticket/enviroment || true
+	db_input high redmine-mail2ticket/project || true
+	db_input high redmine-mail2ticket/method || true
+	db_input high redmine-mail2ticket/host || true
+	db_input high redmine-mail2ticket/password || true
+	db_input high redmine-mail2ticket/username || true
+fi
+
+db_go || true
+

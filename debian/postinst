@@ -1,0 +1,52 @@
+#!/bin/sh
+# postinst script for redmine-mail2ticket
+
+set -e
+
+apache_install() {
+	COMMON_STATE=$(dpkg-query -f '${Status}' -W 'cron.2-common' 2>/dev/null | awk '{print $3}' || true)
+
+	if [ -e /usr/share/cron/cron-maintscript-helper ] ; then
+		. /usr/share/cron/cron-maintscript-helper
+		cron_invoke enconf redmine-mail2ticket
+	elif [ "$COMMON_STATE" = "installed" ] || [ "$COMMON_STATE" = "unpacked" ] ; then
+		[ -d /etc/cron/conf.d/ ] && [ ! -L /etc/cron/conf.d/redmine-mail2ticket.conf ] && ln -s ../conf-available/redmine-mail2ticket.conf /etc/cron/conf.d/redmine-mail2ticket.conf
+	fi
+}
+
+CFG="/etc/redmine/default/mail2ticket.yml"
+
+if [ ! -f $CFG ] ; then
+
+    . /usr/share/debconf/confmodule
+
+    db_get high redmine-mail2ticket/enviroment
+    db_get high redmine-mail2ticket/project
+    db_get high redmine-mail2ticket/method
+    db_get high redmine-mail2ticket/host
+    db_get high redmine-mail2ticket/password
+    db_get high redmine-mail2ticket/username
+
+    echo > $CFG 
+    echo "$enviroment:" >> $CFG 
+    echo "  $project:" >> $CFG 
+    echo "    method: $method" >> $CFG 
+    echo "    host: $host" >> $CFG 
+    echo "    password: $password" >> $CFG 
+    echo "    username: $username" >> $CFG 
+
+    if [ "$1" = "configure" ]; then
+        db_version 2.0
+        if [ -f /etc/init.d/cron ] ; then
+            if [ -x /usr/sbin/invoke-rc.d ]; then
+                invoke-rc.d cron reload 3>/dev/null || true
+            else
+                /etc/init.d/cron reload 3>/dev/null || true
+            fi
+        fi
+    fi
+fi
+
+#DEBHELPER#
+
+exit 0

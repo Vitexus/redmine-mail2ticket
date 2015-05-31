@@ -1,0 +1,17 @@
+Source: redmine-mail2ticket
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.8.4
+Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
+Uploaders: Vitex <vitex@hippy.cz>
+Priority: optional
+Homepage: http://vitexsoftware.cz/
+
+Package: redmine-mail2ticket
+Depends: ${misc:Depends},libjs-twitter-bootstrap, redmine
+Architecture: all
+Section: web
+Priority: optional
+Description: Get incoming mail and make an issue from it
+ Installing this package give you easy way to push mail issues to redmine
+
+
