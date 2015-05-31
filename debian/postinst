@@ -3,29 +3,18 @@
 
 set -e
 
-apache_install() {
-	COMMON_STATE=$(dpkg-query -f '${Status}' -W 'cron.2-common' 2>/dev/null | awk '{print $3}' || true)
-
-	if [ -e /usr/share/cron/cron-maintscript-helper ] ; then
-		. /usr/share/cron/cron-maintscript-helper
-		cron_invoke enconf redmine-mail2ticket
-	elif [ "$COMMON_STATE" = "installed" ] || [ "$COMMON_STATE" = "unpacked" ] ; then
-		[ -d /etc/cron/conf.d/ ] && [ ! -L /etc/cron/conf.d/redmine-mail2ticket.conf ] && ln -s ../conf-available/redmine-mail2ticket.conf /etc/cron/conf.d/redmine-mail2ticket.conf
-	fi
-}
-
 CFG="/etc/redmine/default/mail2ticket.yml"
 
 if [ ! -f $CFG ] ; then
 
     . /usr/share/debconf/confmodule
 
-    db_get high redmine-mail2ticket/enviroment
-    db_get high redmine-mail2ticket/project
-    db_get high redmine-mail2ticket/method
-    db_get high redmine-mail2ticket/host
-    db_get high redmine-mail2ticket/password
-    db_get high redmine-mail2ticket/username
+    db_get redmine-mail2ticket/enviroment
+    db_get redmine-mail2ticket/project
+    db_get redmine-mail2ticket/method
+    db_get redmine-mail2ticket/host
+    db_get redmine-mail2ticket/password
+    db_get redmine-mail2ticket/username
 
     echo > $CFG 
     echo "$enviroment:" >> $CFG 
