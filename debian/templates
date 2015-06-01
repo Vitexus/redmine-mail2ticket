@@ -1,6 +1,6 @@
 Template: redmine-mail2ticket/enviroment
 Type: select
-Choices: production,development
+Choices: production, development
 Description: application environment
  Usualy production or testing
 
@@ -11,7 +11,7 @@ Description: redmine project name:
 
 Template: redmine-mail2ticket/method
 Type: select
-Choices: imap,pop
+Choices: imap, pop
 Description: mail address of icinga admin:
  Or simply press enter to use auto genrated name
 
