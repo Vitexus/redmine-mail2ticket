@@ -13,30 +13,30 @@ Installation
 
 First time wizard help you create initial configuration 
 
-  /etc/redmine/default/mail2ticket.yml
+  **/etc/redmine/default/mail2ticket.yml**
 
 with very simple structure:
 
-production:
-  project_name:
-    method: imap
-    host: mail.domain.exp
-    password: secret123
-    username: username
-  project2_name:
-    method: imap
-    host: mx.domain.exp
-    password: secret321
-    username: username
+    production:
+      project_name:
+        method: imap
+        host: mail.domain.exp
+        password: secret123
+        username: username
+      project2_name:
+        method: imap
+        host: mx.domain.exp
+        password: secret321
+        username: username
 
-development:
-  project3_name:
-    method: pop
-    host: pop3.demo.exp
-    password: h1dden
-    username: username
+    development:
+      project3_name:
+        method: pop
+        host: pop3.demo.exp
+        password: h1dden
+        username: username
 
-etc ...
+    etc ...
 
 
 /etc/cron.d/ rule every 5 min run /usr/share/redmine/extra/mail_handler/mail2ticket.rb
