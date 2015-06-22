@@ -18,14 +18,18 @@
 
 require 'yaml'
 
-cfgFile = '/etc/redmine/default/mail2ticket.yml';
+redmineDir = '/usr/share/redmine/'
+cfgFile = '/etc/redmine/default/mail2ticket.yml'
 
 if File.exist?(cfgFile)
   config=YAML.load_file(cfgFile)
   config.each do |enviroment,projects|
     projects.each do |project,options|
-      command = "bundle exec rake  --silent  redmine:email:receive_" + options["method"] + " RAILS_ENV=\"" + enviroment +  "\" host="+ options["host"] + " username=" + options["username"] + " password=" + options["password"] + "  move_on_success=read move_on_failure=failed project=" + project  + "  allow_override=project"
-      Dir.chdir("/usr/share/redmine/") do
+      if !options.include? 'allow_override'
+        options['allow_override'] = 'project'
+      end 
+      command = "bundle exec rake  --silent  redmine:email:receive_" + options["method"] + " RAILS_ENV=\"" + enviroment +  "\" host="+ options["host"] + " username=" + options["username"] + " password=" + options["password"] + "  move_on_success=read move_on_failure=failed project=" + project  + "  allow_override=" + options['allow_override']
+      Dir.chdir(redmineDir) do
         exec(command)
       end
     end

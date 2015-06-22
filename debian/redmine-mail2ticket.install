@@ -1,1 +1,2 @@
 mail2ticket.rb     /usr/share/redmine/extra/mail_handler
+debian/redmine-mail2ticket.cron.d	/etc/cron.d/mail2ticket
