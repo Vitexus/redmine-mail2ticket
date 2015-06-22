@@ -28,6 +28,7 @@ with very simple structure:
         host: mx.domain.exp
         password: secret321
         username: username
+        allow_override: tracker,category,priority      
 
     development:
       project3_name:
